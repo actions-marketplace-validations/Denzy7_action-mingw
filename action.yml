@@ -16,6 +16,7 @@ runs:
       shell: pwsh
 
     - id: checkpath
+      shell: pwsh
       run: |
         echo $env:Path
 
