@@ -1,0 +1,24 @@
+name: Build with MinGW
+decription: Build C/C++ with MinGW. Only x86_64 (64 bit). Best with CMake
+
+runs:
+  using: composite
+  steps:
+    - id: setup
+      run: |
+        Invoke-WebRequest https://github.com/brechtsanders/winlibs_mingw/releases/download/13.2.0posix-17.0.6-11.0.1-ucrt-r5/winlibs-x86_64-posix-seh-gcc-13.2.0-mingw-w64ucrt-11.0.1-r5.zip -OutFile C:\mingw64.zip
+        Expand-Archive C:\mingw64.zip -DestinationPath C:\
+
+        #https://stackoverflow.com/a/27524483/12368059
+        $oldPath=(Get-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH).Path
+        $newPath=$oldPath+’;C:\mingw64’
+        Set-ItemProperty -Path 'Registry::HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\Environment' -Name PATH –Value $newPath
+      shell: pwsh
+
+    - id: check path
+      run: |
+        echo $env:Path
+
+branding:
+  icon: star
+  color: purple
