@@ -1,0 +1,27 @@
+name: Test
+
+on: 
+  push:
+
+jobs:
+  build_test:
+    runs-on: windows-latest
+    name: 'Build test'
+    strategy:
+      fail-fast: false;
+
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v3
+
+        - name: MinGW
+          uses: Denzy7/action-mingw@v3
+
+        - name: Build
+          shell: pwsh
+          if: runner.os == 'Windows'
+          run: |
+            cmake -S . -B build -G 'MinGW Makefiles'
+            cmake --build build
+        
+
