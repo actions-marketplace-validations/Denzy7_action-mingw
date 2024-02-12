@@ -1,5 +1,5 @@
 name: Build with MinGW
-decription: Build C/C++ with MinGW. Only x86_64 (64 bit). Best with CMake
+description: Build C/C++ with MinGW. Only x86_64 (64 bit). Best with CMake
 
 runs:
   using: composite
