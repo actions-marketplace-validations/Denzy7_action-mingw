@@ -8,7 +8,7 @@ jobs:
     runs-on: windows-latest
     name: 'Build test'
     strategy:
-      fail-fast: false;
+      fail-fast: false
 
     steps:
       - name: Checkout
